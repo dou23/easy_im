@@ -58,14 +58,10 @@ class _SplashPageState extends State<SplashPage> {
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: splashLogoImageUrl,
-                          height: 60,
-                          width: 60,
-                        ),
-                        const Padding(padding: EdgeInsets.all(8)),
-                        const Text("Welcome To Easy IM"),
+                      children: const [
+                        Icon(Icons.cloud),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Text("Welcome To Easy IM"),
                       ],
                     ),
                   ),
