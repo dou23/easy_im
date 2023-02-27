@@ -5,6 +5,8 @@ abstract class RouterPath{
 
   static const ROOT = '/';
 
-  static const LOGIN = '/login';
+  static const LOGIN = '/auth/login';
+
+  static const REGISTER = '/auth/register';
 
 }

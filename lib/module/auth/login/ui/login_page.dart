@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_im/router/easy_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -47,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(24),
                       child: TextField(
                         decoration: const InputDecoration(
-                            labelText: "用户名", icon: Icon(Icons.account_circle)),
+                            labelText: "账号", icon: Icon(Icons.account_circle)),
                         controller: accountTextEditingController,
                       ),
                     ),
@@ -75,6 +77,21 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             "登录",
                             style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () async {
+                            context.push(RouterPath.REGISTER);
+                          },
+                          child: const Text(
+                            "没有账号？去注册",
+                            style: TextStyle(fontSize: 16, color: Colors.blue),
                           ),
                         ),
                       ),
