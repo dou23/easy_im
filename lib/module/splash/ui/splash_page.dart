@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_im/config/constant_pool.dart';
+import 'package:easy_im/config/storage_manager.dart';
 import 'package:easy_im/router/easy_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -23,8 +25,14 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Timer(splashTime, () {
-      context.go(RouterPath.LOGIN);
-      context.canPop();
+      storage.read(key: StringPool.User).then((value) {
+        if (value?.isEmpty ?? false) {
+          context.go(RouterPath.LOGIN);
+          context.canPop();
+        } else {
+          context.go(RouterPath.MAIN);
+        }
+      });
     });
   }
 
