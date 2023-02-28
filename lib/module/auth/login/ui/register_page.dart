@@ -1,3 +1,4 @@
+import 'package:easy_im/config/storage_manager.dart';
 import 'package:easy_im/module/auth/login/provider/register_provider.dart';
 import 'package:easy_im/router/easy_router.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../config/constant_pool.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -113,6 +116,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                                   pwdTextEditingController.value.text)))
                               .value;
                           if (response?.success ?? false) {
+                            storage.write(key: StringPool.User, value: response?.data?.toJson().toString());
                             context.pop(RouterPath.LOGIN);
                             context.go(RouterPath.MAIN);
                           }
