@@ -3,7 +3,7 @@ import 'package:easy_im/generated/json/user_register_entity.g.dart';
 import 'dart:convert';
 
 @JsonSerializable()
-class UserRegisterEntity {
+class UserEntity {
 
 	String? id;
 	String? nickname;
@@ -15,14 +15,14 @@ class UserRegisterEntity {
 	@JSONField(name: "expires_in")
 	int? expiresIn;
   
-  UserRegisterEntity();
+  UserEntity();
 
-  factory UserRegisterEntity.fromJson(Map<String, dynamic> json) => $UserRegisterEntityFromJson(json);
+  factory UserEntity.fromJson(Map<String, dynamic> json) => $UserRegisterEntityFromJson(json);
 
   Map<String, dynamic> toJson() => $UserRegisterEntityToJson(this);
 
-  UserRegisterEntity copyWith({String? id, String? nickname, String? avatar, String? accessToken, String? refreshToken, int? expiresIn}) {
-      return UserRegisterEntity()..id= id ?? this.id
+  UserEntity copyWith({String? id, String? nickname, String? avatar, String? accessToken, String? refreshToken, int? expiresIn}) {
+      return UserEntity()..id= id ?? this.id
 			..nickname= nickname ?? this.nickname
 			..avatar= avatar ?? this.avatar
 			..accessToken= accessToken ?? this.accessToken

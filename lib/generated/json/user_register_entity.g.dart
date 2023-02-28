@@ -1,8 +1,8 @@
 import 'package:easy_im/generated/json/base/json_convert_content.dart';
-import 'package:easy_im/module/auth/login/model/user_register_entity.dart';
+import 'package:easy_im/module/auth/login/model/user_entity.dart';
 
-UserRegisterEntity $UserRegisterEntityFromJson(Map<String, dynamic> json) {
-	final UserRegisterEntity userRegisterEntity = UserRegisterEntity();
+UserEntity $UserRegisterEntityFromJson(Map<String, dynamic> json) {
+	final UserEntity userRegisterEntity = UserEntity();
 	final String? id = jsonConvert.convert<String>(json['id']);
 	if (id != null) {
 		userRegisterEntity.id = id;
@@ -30,7 +30,7 @@ UserRegisterEntity $UserRegisterEntityFromJson(Map<String, dynamic> json) {
 	return userRegisterEntity;
 }
 
-Map<String, dynamic> $UserRegisterEntityToJson(UserRegisterEntity entity) {
+Map<String, dynamic> $UserRegisterEntityToJson(UserEntity entity) {
 	final Map<String, dynamic> data = <String, dynamic>{};
 	data['id'] = entity.id;
 	data['nickname'] = entity.nickname;

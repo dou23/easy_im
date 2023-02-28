@@ -1,10 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_im/module/auth/login/provider/login_provider.dart';
 import 'package:easy_im/router/easy_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../config/constant_pool.dart';
+import '../../../../config/storage_manager.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,8 +18,8 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  TextEditingController? accountTextEditingController;
-  TextEditingController? pwdTextEditingController;
+  late TextEditingController accountTextEditingController;
+  late TextEditingController pwdTextEditingController;
 
   var splashLogoImageUrl =
       'https://tse3-mm.cn.bing.net/th/id/OIP-C.X_glztWjAMcBwKpp72sKpgHaHa?w=183&h=184&c=7&r=0&o=5&pid=1.7';
@@ -25,6 +29,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     super.initState();
     accountTextEditingController = TextEditingController();
     pwdTextEditingController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    accountTextEditingController.dispose();
+    pwdTextEditingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -69,7 +80,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       padding: const EdgeInsets.fromLTRB(24, 54, 24, 24),
                       child: OutlinedButton(
                         onPressed: () async {
-                          EasyLoading.showToast("登录");
+                          EasyLoading.showInfo("登录中...");
+                          var response = ref
+                              .watch(userLoginProvider(UserLoginParams(
+                              accountTextEditingController.value.text,
+                              pwdTextEditingController.value.text)))
+                              .value;
+                          if (response?.success ?? false) {
+                            storage.write(key: StringPool.User, value: response?.data?.toJson().toString());
+                            context.pop(RouterPath.LOGIN);
+                            context.go(RouterPath.MAIN);
+                          }
+                          EasyLoading.dismiss();
                         },
                         style: ButtonStyle(
                             backgroundColor:

@@ -17,8 +17,8 @@ class RegisterPage extends ConsumerStatefulWidget {
 }
 
 class _RegisterPageState extends ConsumerState<RegisterPage> {
+  late TextEditingController nicknameTextEditingController;
   late TextEditingController accountTextEditingController;
-  late TextEditingController idTextEditingController;
   late TextEditingController pwdTextEditingController;
 
   var splashLogoImageUrl =
@@ -26,16 +26,16 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   @override
   void initState() {
+    nicknameTextEditingController = TextEditingController();
     accountTextEditingController = TextEditingController();
-    idTextEditingController = TextEditingController();
     pwdTextEditingController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
+    nicknameTextEditingController.dispose();
     accountTextEditingController.dispose();
-    idTextEditingController.dispose();
     pwdTextEditingController.dispose();
     super.dispose();
   }
@@ -64,7 +64,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       child: TextField(
                         decoration: const InputDecoration(
                             labelText: "昵称", icon: Icon(Icons.person)),
-                        controller: accountTextEditingController,
+                        controller: nicknameTextEditingController,
                       ),
                     ),
                     Padding(
@@ -75,7 +75,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           labelText: "账号",
                           icon: Icon(Icons.account_box),
                         ),
-                        controller: idTextEditingController,
+                        controller: accountTextEditingController,
                       ),
                     ),
                     Padding(
@@ -94,12 +94,12 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       child: OutlinedButton(
                         onPressed: () async {
                           EasyLoading.show(status: "注册中");
-                          if (accountTextEditingController.value.text.isEmpty) {
+                          if (nicknameTextEditingController.value.text.isEmpty) {
                             EasyLoading.showToast("用户昵称不能为空");
                             EasyLoading.dismiss();
                             return;
                           }
-                          if (idTextEditingController.value.text.isEmpty) {
+                          if (accountTextEditingController.value.text.isEmpty) {
                             EasyLoading.showToast("用户Id不能为空");
                             EasyLoading.dismiss();
                             return;
@@ -111,8 +111,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           }
                           var response = ref
                               .watch(userRegisterProvider(UserRegisterParams(
+                                  nicknameTextEditingController.value.text,
                                   accountTextEditingController.value.text,
-                                  idTextEditingController.value.text,
                                   pwdTextEditingController.value.text)))
                               .value;
                           if (response?.success ?? false) {
