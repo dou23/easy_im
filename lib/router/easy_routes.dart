@@ -11,4 +11,11 @@ abstract class RouterPath{
 
   static const MAIN = '/main';
 
+  static const MSGLIST = '/main/msg/list';
+
+  static const CONTACTS = '/main/contacts';
+
+  static const MINE = '/main/mine';
+
+
 }

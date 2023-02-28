@@ -64,7 +64,7 @@ class _MainPageState extends ConsumerState<MainPage> {
         ],
         currentIndex:ref.watch(_currentPositionProvider),
         onTap: (int position){
-          pageController.jumpTo(position as double);
+          pageController.jumpToPage(position);
         },
       ),
     );

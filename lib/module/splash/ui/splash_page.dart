@@ -26,6 +26,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Timer(splashTime, () {
       storage.read(key: StringPool.User).then((value) {
+        print('当前用户信息:$value');
         if (value?.isEmpty ?? false) {
           context.go(RouterPath.LOGIN);
           context.canPop();
