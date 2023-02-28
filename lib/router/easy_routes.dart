@@ -9,4 +9,6 @@ abstract class RouterPath{
 
   static const REGISTER = '/auth/register';
 
+  static const MAIN = '/main';
+
 }

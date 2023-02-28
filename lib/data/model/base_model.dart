@@ -1,4 +1,4 @@
-import '../../generated/json/base/json_convert_content.dart';
+import '../../../generated/json/base/json_convert_content.dart';
 
 class BaseResponse<T> {
   bool get success => 200 == code;
