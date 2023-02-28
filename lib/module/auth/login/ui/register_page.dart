@@ -70,7 +70,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
                       child: TextField(
-                        obscureText: true,
                         decoration: const InputDecoration(
                           labelText: "账号",
                           icon: Icon(Icons.account_box),
@@ -92,9 +91,10 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(24, 54, 24, 24),
                       child: OutlinedButton(
-                        onPressed: () async {
-                          EasyLoading.show(status: "注册中");
-                          if (nicknameTextEditingController.value.text.isEmpty) {
+                        onPressed: () {
+                          EasyLoading.showInfo("注册中...");
+                          if (nicknameTextEditingController
+                              .value.text.isEmpty) {
                             EasyLoading.showToast("用户昵称不能为空");
                             EasyLoading.dismiss();
                             return;
@@ -116,7 +116,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                                   pwdTextEditingController.value.text)))
                               .value;
                           if (response?.success ?? false) {
-                            storage.write(key: StringPool.User, value: response?.data?.toJson().toString());
+                            storage.write(
+                                key: StringPool.User,
+                                value: response?.data?.toJson().toString());
                             context.pop(RouterPath.LOGIN);
                             context.go(RouterPath.MAIN);
                           }

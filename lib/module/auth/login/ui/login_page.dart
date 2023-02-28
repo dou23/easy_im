@@ -79,7 +79,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(24, 54, 24, 24),
                       child: OutlinedButton(
-                        onPressed: () async {
+                        onPressed: () {
                           EasyLoading.showInfo("登录中...");
                           var response = ref
                               .watch(userLoginProvider(UserLoginParams(
