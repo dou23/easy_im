@@ -25,10 +25,10 @@ class _AuthRepository extends BaseRepository {
   ///用户注册
   Future<BaseResponse<UserEntity>> userLogin(
       String account, String password) async {
-    var response = await http.post(GlobalApi.userLogin(), data: {
+    var response = await http.post(GlobalApi.userLogin(), data: jsonEncode({
       "account": account,
       "password": password,
-    });
+    }));
     return BaseResponse<UserEntity>.fromJson(response.data);
   }
 

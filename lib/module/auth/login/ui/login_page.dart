@@ -91,20 +91,23 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             EasyLoading.dismiss();
                             return;
                           }
-                          var response = ref
-                              .watch(userLoginProvider(UserLoginParams(
-                              accountTextEditingController.value.text,
-                              pwdTextEditingController.value.text)))
-                              .value;
-                          if (response?.success ?? false) {
-                            storage.write(key: StringPool.User, value: response?.data?.toJson().toString());
-                            context.pop(RouterPath.LOGIN);
-                            context.go(RouterPath.MAIN);
-                          }
-                          if (response?.msg?.isEmpty??false) {
-                            EasyLoading.showToast(response?.msg??"");
-                          }
-                          EasyLoading.dismiss();
+                          var response = ref.watch(userLoginProvider(
+                              UserLoginParams(
+                                  accountTextEditingController.value.text,
+                                  pwdTextEditingController.value.text)));
+                          response.whenData((value) => () {
+                                if (value?.success ?? false) {
+                                  storage.write(
+                                      key: StringPool.User,
+                                      value: value?.data?.toJson().toString());
+                                  context.pop(RouterPath.LOGIN);
+                                  context.go(RouterPath.MAIN);
+                                }
+                                if (value?.msg?.isEmpty ?? false) {
+                                  EasyLoading.showToast(value?.msg ?? "");
+                                }
+                                EasyLoading.dismiss();
+                              });
                         },
                         style: ButtonStyle(
                             backgroundColor:

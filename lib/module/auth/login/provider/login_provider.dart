@@ -17,7 +17,7 @@ class UserLoginParams {
 
 ///用户注册
 final userLoginProvider =
-    FutureProvider.family<BaseResponse<UserEntity>, UserLoginParams>(
+    FutureProvider.family.autoDispose<BaseResponse<UserEntity>, UserLoginParams>(
         (ref, params) async {
   var userRegister =
       await AuthRepository.userLogin(params.account, params.password);
