@@ -91,7 +91,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(24, 54, 24, 24),
                       child: OutlinedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           EasyLoading.showInfo("注册中...");
                           if (nicknameTextEditingController
                               .value.text.isEmpty) {
@@ -100,7 +100,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                             return;
                           }
                           if (accountTextEditingController.value.text.isEmpty) {
-                            EasyLoading.showToast("用户Id不能为空");
+                            EasyLoading.showToast("用户账号不能为空");
                             EasyLoading.dismiss();
                             return;
                           }

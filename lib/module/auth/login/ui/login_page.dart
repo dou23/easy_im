@@ -79,8 +79,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(24, 54, 24, 24),
                       child: OutlinedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           EasyLoading.showInfo("登录中...");
+                          if (accountTextEditingController.value.text.isEmpty) {
+                            EasyLoading.showToast("用户账号不能为空");
+                            EasyLoading.dismiss();
+                            return;
+                          }
+                          if (pwdTextEditingController.value.text.isEmpty) {
+                            EasyLoading.showToast("密码不能为空");
+                            EasyLoading.dismiss();
+                            return;
+                          }
                           var response = ref
                               .watch(userLoginProvider(UserLoginParams(
                               accountTextEditingController.value.text,
@@ -90,6 +100,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             storage.write(key: StringPool.User, value: response?.data?.toJson().toString());
                             context.pop(RouterPath.LOGIN);
                             context.go(RouterPath.MAIN);
+                          }
+                          if (response?.msg?.isEmpty??false) {
+                            EasyLoading.showToast(response?.msg??"");
                           }
                           EasyLoading.dismiss();
                         },

@@ -3,7 +3,7 @@ import 'dart:core';
 ///http请求api常量池
 class GlobalApi {
   static String BaseUrl() {
-    return "http://127.0.0.1:8080/api/";
+    return "http://127.0.0.1:8888/api/";
   }
 
   ///用户登录
