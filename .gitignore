@@ -44,5 +44,5 @@ app.*.map.json
 /android/app/release
 
 # 自定义项目忽略
-.env
+#.env
 env.g.dart
