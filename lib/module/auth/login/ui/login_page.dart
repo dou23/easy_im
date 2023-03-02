@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/constant_pool.dart';
 import '../../../../config/storage_manager.dart';
+import '../provider/auth_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -91,23 +92,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             EasyLoading.dismiss();
                             return;
                           }
-                          var response = ref.watch(userLoginProvider(
-                              UserLoginParams(
+                          var response = await ref
+                              .watch(authProvider.notifier)
+                              .state
+                              .userLogin(
                                   accountTextEditingController.value.text,
-                                  pwdTextEditingController.value.text)));
-                          response.whenData((value) => () {
-                                if (value?.success ?? false) {
-                                  storage.write(
-                                      key: StringPool.User,
-                                      value: value?.data?.toJson().toString());
-                                  context.pop(RouterPath.LOGIN);
-                                  context.go(RouterPath.MAIN);
-                                }
-                                if (value?.msg?.isEmpty ?? false) {
-                                  EasyLoading.showToast(value?.msg ?? "");
-                                }
-                                EasyLoading.dismiss();
-                              });
+                                  pwdTextEditingController.value.text);
+                          if (response.success ?? false) {
+                            storage.write(
+                                key: StringPool.User,
+                                value: response.data?.toJson().toString());
+                            context.go(RouterPath.MAIN);
+                          }
+                          if (response.msg?.isEmpty ?? false) {
+                            EasyLoading.showToast(response.msg ?? "");
+                          }
+                          EasyLoading.dismiss();
                         },
                         style: ButtonStyle(
                             backgroundColor:

@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/constant_pool.dart';
+import '../provider/auth_provider.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -109,12 +110,13 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                             EasyLoading.dismiss();
                             return;
                           }
-                          var response = ref
-                              .watch(userRegisterProvider(UserRegisterParams(
+                          var response = await ref
+                              .watch(authProvider.notifier)
+                              .state
+                              .userRegister(
                                   nicknameTextEditingController.value.text,
                                   accountTextEditingController.value.text,
-                                  pwdTextEditingController.value.text)))
-                              .value;
+                                  pwdTextEditingController.value.text);
                           if (response?.success ?? false) {
                             storage.write(
                                 key: StringPool.User,
