@@ -1,3 +1,4 @@
+import 'package:easy_im/chatlib/socket/chat_socket_client.dart';
 import 'package:easy_im/module/contacts/contacts_page.dart';
 import 'package:easy_im/module/mine/mine_page.dart';
 import 'package:easy_im/module/msglist/msg_list_page.dart';
@@ -30,6 +31,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       initialPage: ref.read(_currentPositionProvider),
       keepPage: true,
     );
+    ChatSocketClient.connect();
   }
 
   ///主界面
