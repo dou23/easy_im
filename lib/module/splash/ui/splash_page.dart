@@ -6,6 +6,7 @@ import 'package:easy_im/config/storage_manager.dart';
 import 'package:easy_im/router/easy_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:desktop_window/desktop_window.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -22,7 +23,8 @@ class _SplashPageState extends State<SplashPage> {
   var splashTime = const Duration(milliseconds: 1500);
 
   @override
-  void initState() {
+  void initState() async {
+    await DesktopWindow.setWindowSize(Size(300,500));
     super.initState();
     Timer(splashTime, () {
       storage.read(key: StringPool.User).then((value) {
