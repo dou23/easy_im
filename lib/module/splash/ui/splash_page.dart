@@ -23,8 +23,8 @@ class _SplashPageState extends State<SplashPage> {
   var splashTime = const Duration(milliseconds: 1500);
 
   @override
-  void initState() async {
-    await DesktopWindow.setWindowSize(Size(300,500));
+  void initState() {
+    DesktopWindow.setWindowSize(Size(300,600));
     super.initState();
     Timer(splashTime, () {
       storage.read(key: StringPool.User).then((value) {
