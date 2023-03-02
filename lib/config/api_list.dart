@@ -1,9 +1,13 @@
 import 'dart:core';
 
+import 'package:easy_im/config/env.dart';
+
 ///http请求api常量池
 class GlobalApi {
+  static String host = Env.host;
+
   static String BaseUrl() {
-    return "http://47.110.67.165:2337/api/";
+    return '${host}/api/';
   }
 
   ///用户登录
@@ -12,23 +16,22 @@ class GlobalApi {
   }
 
   ///用户登录
-  static String userLogin(){
+  static String userLogin() {
     return "user/login";
   }
 
   ///退出登录
-  static String userLogout(){
+  static String userLogout() {
     return "user/logout";
   }
 
   ///用户权限token
-  static String userAccessToken(){
+  static String userAccessToken() {
     return "user/access_token";
   }
 
   ///用户刷新token
-  static String userRefreshToken(){
+  static String userRefreshToken() {
     return "user/refresh_token";
   }
-
 }

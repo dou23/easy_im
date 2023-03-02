@@ -30,7 +30,6 @@ class _SplashPageState extends State<SplashPage> {
       storage.read(key: StringPool.User).then((value) {
         if (value?.isEmpty ?? true) { //没有登录信息
           context.go(RouterPath.LOGIN);
-          context.canPop();
         } else {
           context.go(RouterPath.MAIN);
         }
