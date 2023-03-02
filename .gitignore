@@ -45,4 +45,4 @@ app.*.map.json
 
 # 自定义项目忽略
 .env
-env.g.dart
+env.g.dart!/.env
