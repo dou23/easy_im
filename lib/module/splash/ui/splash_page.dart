@@ -1,21 +1,21 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_im/config/constant_pool.dart';
-import 'package:easy_im/config/storage_manager.dart';
+import 'package:easy_im/module/auth/auth_provider/user_provider.dart';
 import 'package:easy_im/router/easy_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:desktop_window/desktop_window.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  ConsumerState<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends ConsumerState<SplashPage> {
   var splashBackgroundImageUrl = 'http://bing.getlove.cn/bingImage';
   var splashLogoImageUrl =
       // 'https://iconfont.alicdn.com/p/illus/preview_image/PyS0EYNRK8qx/0868675f-b1af-455e-af93-97f0e11473de.png';
@@ -24,16 +24,21 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void initState() {
-    DesktopWindow.setWindowSize(Size(300,600));
+    DesktopWindow.setWindowSize(const Size(328, 600));
     super.initState();
-    Timer(splashTime, () {
-      storage.read(key: StringPool.User).then((value) {
-        if (value?.isEmpty ?? true) { //没有登录信息
-          context.go(RouterPath.LOGIN);
-        } else {
-          context.go(RouterPath.MAIN);
-        }
-      });
+    Timer(splashTime, () {});
+    initData();
+  }
+
+  void initData() {
+    initUserData((user) {
+      ref.read(UserProvider.notifier).setUser(user);
+      print('用户信息: ${user}');
+      if (user?.accessToken?.isNotEmpty ?? false) {
+        context.go(RouterPath.MAIN);
+      } else {
+        context.go(RouterPath.LOGIN);
+      }
     });
   }
 

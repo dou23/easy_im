@@ -1,5 +1,6 @@
+import 'dart:convert';
+
 import 'package:easy_im/config/storage_manager.dart';
-import 'package:easy_im/module/auth/login/provider/register_provider.dart';
 import 'package:easy_im/router/easy_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -120,7 +121,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           if (response?.success ?? false) {
                             storage.write(
                                 key: StringPool.User,
-                                value: response?.data?.toJson().toString());
+                                value:
+                                    jsonEncode(response?.data?.toJson() ?? ""));
                             context.pop(RouterPath.LOGIN);
                             context.go(RouterPath.MAIN);
                           }

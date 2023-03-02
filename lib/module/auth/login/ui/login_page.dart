@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_im/module/auth/login/provider/login_provider.dart';
+import 'dart:convert';
+
 import 'package:easy_im/router/easy_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -101,7 +101,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           if (response.success ?? false) {
                             storage.write(
                                 key: StringPool.User,
-                                value: response.data?.toJson().toString());
+                                value:
+                                    jsonEncode(response?.data?.toJson() ?? ""));
                             context.go(RouterPath.MAIN);
                           }
                           if (response.msg?.isEmpty ?? false) {
