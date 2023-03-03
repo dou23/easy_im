@@ -5,6 +5,7 @@ git remote add -f origin https://github.com/iotames/easyim.git \
 git config core.sparsecheckout true \
 echo protobuf/*  >> .git/info/sparse-checkout \
 git pull origin master \
+git branch --set-upstream-to=origin/master master
 # read://https_blog.csdn.net/?url=https%3A%2F%2Fblog.csdn.net%2Fqq_41970098%2Farticle%2Fdetails%2F112938451
 # https://stackoverflow.com/questions/24691300/git-sparse-checkout-leaves-no-entry-on-working-directory
 #| out-file -Encoding Ascii
