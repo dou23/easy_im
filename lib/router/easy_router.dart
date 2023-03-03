@@ -1,6 +1,6 @@
 import 'package:easy_im/module/auth/login/ui/login_page.dart';
 import 'package:easy_im/module/auth/login/ui/register_page.dart';
-import 'package:easy_im/module/contacts/contacts_page.dart';
+import 'package:easy_im/module/contacts/ui/contacts_page.dart';
 import 'package:easy_im/module/main/ui/main_page.dart';
 import 'package:easy_im/module/mine/mine_page.dart';
 import 'package:easy_im/module/msglist/msg_list_page.dart';

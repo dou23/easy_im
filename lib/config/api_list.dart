@@ -34,4 +34,29 @@ class GlobalApi {
   static String userRefreshToken() {
     return "user/refresh_token";
   }
+
+  ///好友列表
+  static String userFriends(){
+    return "user/friends";
+  }
+
+  ///添加好友
+  static String userFriendAdd(){
+    return "user/friend/add";
+  }
+
+  ///收受好友请求
+  static String userFriendAccept(){
+    return "user/friend/accept";
+  }
+
+  ///删除好友
+  static String userFriendRemove(){
+    return "user/friend/remove";
+  }
+
+  ///搜索用户
+  static String userSearch(){
+    return "user/search";
+  }
 }
