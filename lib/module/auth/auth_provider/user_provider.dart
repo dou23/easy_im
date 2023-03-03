@@ -5,9 +5,14 @@ import '../../../config/constant_pool.dart';
 import '../../../config/storage_manager.dart';
 import '../login/model/user_entity.dart';
 
-void initUserData(ValueChanged<UserEntity> userCallBack) {
+void initUserData(ValueChanged<UserEntity?> userCallBack) {
   storage.read(key: StringPool.User).then((userJson) {
-    var userEntity = UserEntity.fromJson(jsonDecode(userJson.toString() ?? ""));
+    if (userJson?.isEmpty ?? true) {
+      userCallBack(null);
+      return;
+    }
+    var userEntity =
+        UserEntity.fromJson(jsonDecode(userJson?.toString() ?? ""));
     userCallBack.call(userEntity);
   });
 }

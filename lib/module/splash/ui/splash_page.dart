@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_im/config/constant_pool.dart';
+import 'package:easy_im/config/storage_manager.dart';
 import 'package:easy_im/module/auth/auth_provider/user_provider.dart';
 import 'package:easy_im/router/easy_router.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,9 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   void initData() {
     initUserData((user) {
-      ref.read(UserProvider.notifier).setUser(user);
+      if (user!=null) {
+        ref.read(UserProvider.notifier).setUser(user);
+      }
       print('用户信息: ${user}');
       if (user?.accessToken?.isNotEmpty ?? false) {
         context.go(RouterPath.MAIN);
