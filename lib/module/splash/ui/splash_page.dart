@@ -5,6 +5,7 @@ import 'package:easy_im/config/constant_pool.dart';
 import 'package:easy_im/config/storage_manager.dart';
 import 'package:easy_im/module/auth/auth_provider/user_provider.dart';
 import 'package:easy_im/router/easy_router.dart';
+import 'package:easy_im/utils/platform/platform_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +27,9 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   void initState() {
-    DesktopWindow.setWindowSize(const Size(328, 600));
+    if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+      DesktopWindow.setWindowSize(const Size(328, 600));
+    }
     super.initState();
     Timer(splashTime, () {});
     initData();
@@ -34,7 +37,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   void initData() {
     initUserData((user) {
-      if (user!=null) {
+      if (user != null) {
         ref.read(UserProvider.notifier).setUser(user);
       }
       print('用户信息: ${user}');
