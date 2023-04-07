@@ -7,8 +7,8 @@ import 'package:easy_im/module/auth/login/model/user_entity.dart';
 import 'package:easy_im/net/global_api.dart';
 
 
-///注册相关api
-class AuthRepository extends BaseRepository {
+///注册登录相关api
+class LoginRepository extends BaseRepository {
 
   ///用户注册
   Future<BaseResponse<UserEntity>> userRegister(
