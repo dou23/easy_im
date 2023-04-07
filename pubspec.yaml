@@ -57,7 +57,6 @@ dependencies:
   desktop_window: ^0.4.0
   envied: ^0.3.0
   protobuf: ^2.1.0
-  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:
