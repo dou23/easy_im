@@ -12,7 +12,9 @@ class _MinePageState extends ConsumerState<MinePage>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: Text("我的"),
+    );
   }
 
   @override

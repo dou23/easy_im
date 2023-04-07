@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../config/constant_pool.dart';
 import '../provider/auth_provider.dart';
@@ -95,10 +94,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       padding: const EdgeInsets.fromLTRB(24, 54, 24, 24),
                       child: OutlinedButton(
                         onPressed: () async {
-                          var permissionStatus = await Permission.storage.status;
-                          if (permissionStatus.isDenied) {
-                            return;
-                          }
                           EasyLoading.showInfo("注册中...");
                           if (nicknameTextEditingController
                               .value.text.isEmpty) {

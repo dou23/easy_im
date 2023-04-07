@@ -12,7 +12,9 @@ class _ContactsPageState extends ConsumerState<ContactsPage>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: Text("联系人"),
+    );
   }
 
   @override

@@ -13,7 +13,9 @@ class _MsgListPageState extends ConsumerState<MsgListPage> with AutomaticKeepAli
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return const Placeholder();
+    return Center(
+      child: Text("消息"),
+    );
   }
 
   @override

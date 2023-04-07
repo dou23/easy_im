@@ -1,0 +1,8 @@
+获取easy_im中的proto
+在Windows中使用PowerShell
+git init \
+git remote add -f origin https://github.com/iotames/easyim.git \
+git config core.sparsecheckout true \
+echo protobuf/*  >> .git/info/sparse-checkout \
+git pull origin master \
+git branch --set-upstream-to=origin/master master
